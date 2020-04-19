@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <color name="zxingcode_scan_viewfinder_laser">#4ea8ec</color>
+    <color name="zxingcode_scan_viewfinder_mask">#a2000000</color>
+</resources>

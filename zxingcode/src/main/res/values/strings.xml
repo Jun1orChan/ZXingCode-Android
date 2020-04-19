@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">zxingcode</string>
+    <string name="zxingcode_scan_hint_text">将二维码放入框内，即可自动扫描</string>
+    <string name="zxingcode_camera_permission_denied_tips" formatted="false">请在“设置-应用管理-%s-应用权限”选项中，允许%s访问相机</string>
+    <string name="zxingcode_btn_text_denied_setting">去设置</string>
+    <string name="zxingcode_btn_text_denied_cancel">取消</string>
+    <string name="zxingcode_light_open">打开手电筒</string>
+    <string name="zxingcode_light_close">关闭手电筒</string>
+</resources>
