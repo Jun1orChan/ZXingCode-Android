@@ -9,11 +9,10 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.istrong.dialog.MaterialDialog;
-import com.istrong.util.AppUtil;
-import com.istrong.util.StatusBarUtil;
-import com.istrong.zxingcode.R;
 
+import org.jun1or.dialog.MaterialDialog;
+import org.jun1or.util.AppUtil;
+import org.jun1or.util.StatusBarUtil;
 import org.jun1or.zxingcode.listener.OnScanListener;
 
 import com.yanzhenjie.permission.Action;

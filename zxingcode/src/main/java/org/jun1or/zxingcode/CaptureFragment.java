@@ -24,13 +24,12 @@ import android.widget.Toast;
 import com.google.zxing.DecodeHintType;
 import com.google.zxing.MultiFormatReader;
 import com.google.zxing.Result;
-import com.istrong.imgsel.ISNav;
-import com.istrong.imgsel.ImageConfig;
-import com.istrong.imgsel.image.ImageSelectActivity;
-import com.istrong.util.DisplayUtil;
-import com.istrong.util.StatusBarUtil;
-import com.istrong.zxingcode.R;
 
+import org.jun1or.imgsel.ISNav;
+import org.jun1or.imgsel.ImageConfig;
+import org.jun1or.imgsel.image.ImageSelectActivity;
+import org.jun1or.util.DisplayUtil;
+import org.jun1or.util.StatusBarUtil;
 import org.jun1or.zxingcode.camera.CameraManager;
 import org.jun1or.zxingcode.listener.OnScanListener;
 import org.jun1or.zxingcode.manager.BeepManager;

@@ -9,8 +9,8 @@ import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.istrong.util.DisplayUtil;
-import com.istrong.zxingcode.R;
+import org.jun1or.util.DisplayUtil;
+import org.jun1or.zxingcode.R;
 import org.jun1or.zxingcode.camera.CameraManager;
 
 public final class ViewFinderView extends View {

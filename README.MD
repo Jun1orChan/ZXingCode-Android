@@ -9,18 +9,10 @@
 
 ## 引用
 
-1.在根目录build.gradle文件中添加
+1.项目build.gradle文件中添加
 
 ```gradle
-         maven {
-                url "http://114.215.182.48:7777/nexus/content/repositories/Android/"
-            }
- ```
-
-2.项目build.gradle文件中添加
-
-```gradle
-   implementation 'com.istrong.baselib:zxingcode:1.0.6'
+   implementation 'org.jun1or.baselib:zxingcode:1.0.0'
  ```
 
 ## 使用
@@ -90,7 +82,6 @@
 ```
 ## 版本记录
 
-### 1.0.6
+### 1.0.0
 
-- 适配Android 9
-- 更新依赖库
+- 初始发布

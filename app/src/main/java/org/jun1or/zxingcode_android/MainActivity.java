@@ -14,10 +14,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.istrong.imgsel.ISNav;
-import com.istrong.imgsel.callback.ImageLoader;
-import com.istrong.zxingcode_android.GlideApp;
 
+import org.jun1or.imgsel.ISNav;
+import org.jun1or.imgsel.callback.ImageLoader;
 import org.jun1or.zxingcode.ZXConfig;
 import org.jun1or.zxingcode.ZXNav;
 import org.jun1or.zxingcode.utils.ZXingUtil;
