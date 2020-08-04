@@ -6,6 +6,9 @@ import android.os.Vibrator;
 
 import java.io.Closeable;
 
+/**
+ * @author cwj
+ */
 public final class BeepManager implements MediaPlayer.OnErrorListener, Closeable {
 
     private static final float BEEP_VOLUME = 0.90f;

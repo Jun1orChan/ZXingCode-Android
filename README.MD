@@ -12,7 +12,7 @@
 1.项目build.gradle文件中添加
 
 ```gradle
-   implementation 'org.jun1or.baselib:zxingcode:1.0.0'
+   implementation 'org.jun1or.baselib:zxingcode:1.0.1'
  ```
 
 ## 使用
@@ -66,9 +66,6 @@
     }
 
 ```
-4.自定义Activity
-
-- 参考源码CaptureActivity；需要自行申请权限。
 
 
 ## 混淆
@@ -81,6 +78,9 @@
 
 ```
 ## 版本记录
+
+### 1.0.1
+- 升级至AndroidX
 
 ### 1.0.0
 

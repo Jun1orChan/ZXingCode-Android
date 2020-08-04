@@ -1,7 +1,11 @@
 package org.jun1or.zxingcode.camera.open;
 
+
 import android.hardware.Camera;
 
+/**
+ * @author cwj
+ */
 public final class OpenCamera {
 
     private final int index;

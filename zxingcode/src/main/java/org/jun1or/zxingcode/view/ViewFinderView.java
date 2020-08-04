@@ -13,6 +13,10 @@ import org.jun1or.util.DisplayUtil;
 import org.jun1or.zxingcode.R;
 import org.jun1or.zxingcode.camera.CameraManager;
 
+
+/**
+ * @author cwj
+ */
 public final class ViewFinderView extends View {
 
     private CameraManager cameraManager;

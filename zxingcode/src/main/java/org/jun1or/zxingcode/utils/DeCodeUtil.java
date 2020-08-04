@@ -8,10 +8,14 @@ import com.google.zxing.PlanarYUVLuminanceSource;
 import com.google.zxing.ReaderException;
 import com.google.zxing.Result;
 import com.google.zxing.common.HybridBinarizer;
+
 import org.jun1or.zxingcode.camera.CameraManager;
 
 import java.io.ByteArrayOutputStream;
 
+/**
+ * @author cwj
+ */
 public class DeCodeUtil {
     /**
      * Decode the data within the viewfinder rectangle, and time how long it took. For efficiency,
@@ -26,8 +30,9 @@ public class DeCodeUtil {
             // portrait
             byte[] rotatedData = new byte[data.length];
             for (int x = 0; x < width; x++) {
-                for (int y = 0; y < height; y++)
+                for (int y = 0; y < height; y++) {
                     rotatedData[y * width + width - x - 1] = data[y + x * height];
+                }
             }
             data = rotatedData;
         }

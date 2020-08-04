@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 
 import com.google.zxing.PlanarYUVLuminanceSource;
+
 import org.jun1or.zxingcode.camera.open.OpenCamera;
 import org.jun1or.zxingcode.camera.open.OpenCameraInterface;
 
@@ -75,7 +76,8 @@ public final class CameraManager {
 
         Camera cameraObject = theCamera.getCamera();
         Camera.Parameters parameters = cameraObject.getParameters();
-        String parametersFlattened = parameters == null ? null : parameters.flatten(); // Save these, temporarily
+        // Save these, temporarily
+        String parametersFlattened = parameters == null ? null : parameters.flatten();
         try {
             configManager.setDesiredCameraParameters(theCamera, false);
         } catch (RuntimeException re) {

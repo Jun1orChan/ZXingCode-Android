@@ -227,8 +227,9 @@ public class ZXingUtil {
             options.inJustDecodeBounds = true;
             BitmapFactory.decodeFile(picturePath, options);
             int sampleSize = options.outHeight / 400;
-            if (sampleSize <= 0)
+            if (sampleSize <= 0) {
                 sampleSize = 1;
+            }
             options.inSampleSize = sampleSize;
             options.inJustDecodeBounds = false;
 

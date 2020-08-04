@@ -4,26 +4,23 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import org.jun1or.imgsel.ISNav;
 import org.jun1or.imgsel.callback.ImageLoader;
-import org.jun1or.zxingcode.ZXConfig;
-import org.jun1or.zxingcode.ZXNav;
 import org.jun1or.zxingcode.utils.ZXingUtil;
 
-public class MainActivity extends AppCompatActivity {
 
-    public static final int REQUEST_CODE_SCAN = 100;
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,25 +35,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goZXingCodeScanActivity(View view) {
-        ZXConfig zxConfig = new ZXConfig.Builder()
-                //显示相册功能
-                .isShowPhotoAlbum(true)
-                //四角和扫描线的颜色
-                .setScanColor(Color.RED)
-                .builder();
-        ZXNav.startScan(this, zxConfig, REQUEST_CODE_SCAN);
+        Intent intent = new Intent(this, QrCodeActivity.class);
+        startActivity(intent);
     }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode != RESULT_OK) {
-            return;
-        }
-        if (requestCode == REQUEST_CODE_SCAN)
-            ((TextView) findViewById(R.id.tvResult)).setText("二维码内容：" + data.getStringExtra(ZXNav.KEY_CODE_CONTENT));
-    }
-
 
     public void createQrCode(View view) {
         Editable editable = ((EditText) findViewById(R.id.etText)).getText();

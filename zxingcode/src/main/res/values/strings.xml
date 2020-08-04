@@ -6,4 +6,6 @@
     <string name="zxingcode_btn_text_denied_cancel">取消</string>
     <string name="zxingcode_light_open">打开手电筒</string>
     <string name="zxingcode_light_close">关闭手电筒</string>
+    <string name="zxingcode_light_close_failed">关闭手电筒失败</string>
+    <string name="zxingcode_light_open_failed">打开手电筒失败</string>
 </resources>

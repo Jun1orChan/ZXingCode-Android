@@ -2,11 +2,19 @@ package org.jun1or.zxingcode;
 
 import android.graphics.Color;
 
+/**
+ * @author cwj
+ */
 public class ZXConfig {
 
-    //是否显示相册
+
+    /**
+     * 是否显示相册
+     */
     private boolean showPhotoAlbum;
-    //扫描框和扫描线的颜色
+    /**
+     * 扫描框和扫描线的颜色
+     */
     private int mScanColor;
 
     private ZXConfig() {

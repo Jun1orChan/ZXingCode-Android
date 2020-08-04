@@ -13,6 +13,9 @@ import org.jun1or.zxingcode.camera.open.CameraFacing;
 import org.jun1or.zxingcode.camera.open.OpenCamera;
 
 
+/**
+ * @author cwj
+ */
 public final class CameraConfigurationManager {
 
     private static final String TAG = "CameraConfiguration";

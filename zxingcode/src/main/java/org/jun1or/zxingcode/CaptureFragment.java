@@ -8,10 +8,7 @@ import android.hardware.Camera;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -20,6 +17,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.google.zxing.DecodeHintType;
 import com.google.zxing.MultiFormatReader;
@@ -45,7 +45,9 @@ import java.util.concurrent.Executors;
 
 public class CaptureFragment extends Fragment implements SurfaceHolder.Callback, Camera.PreviewCallback, View.OnClickListener {
 
-    private static final String TAG = CaptureActivity.class.getSimpleName();
+    public static final String KEY_SHOW_ALBUM = "showAlbum";
+    public static final String KEY_SCAN_COLOR = "scanColor";
+
     private static final int REQUESTCODE_ALBUN = 0x88;
 
     private SurfaceView mPreView;
@@ -62,7 +64,9 @@ public class CaptureFragment extends Fragment implements SurfaceHolder.Callback,
 
     private boolean isLightOn = false;
 
+    //后面优化线程池使用方式
     private ExecutorService mSingleThreadExecutor = Executors.newSingleThreadExecutor();
+
     private Handler mMainHandler = new Handler(Looper.getMainLooper());
 
     public void setOnScanListener(OnScanListener onScanListener) {
@@ -91,7 +95,7 @@ public class CaptureFragment extends Fragment implements SurfaceHolder.Callback,
     private void initViews(View view) {
         mPreView = (SurfaceView) view.findViewById(R.id.sfvPreView);
         mViewFinder = (ViewFinderView) view.findViewById(R.id.viewFinder);
-        mViewFinder.setScanLineColor(getArguments().getInt(ZXNav.KEY_SCAN_COLOR, Color.parseColor("#4ea8ec")));
+        mViewFinder.setScanLineColor(getArguments().getInt(KEY_SCAN_COLOR, Color.parseColor("#4ea8ec")));
         view.findViewById(R.id.llLight).setOnClickListener(this);
         mImgLight = (ImageView) view.findViewById(R.id.imgLight);
         mTvLightInfo = (TextView) view.findViewById(R.id.tvLightInfo);
@@ -100,7 +104,7 @@ public class CaptureFragment extends Fragment implements SurfaceHolder.Callback,
         int margin = DisplayUtil.dp2px(view.getContext(), 10);
         setMargins(imgClose, margin, StatusBarUtil.getStatusBarHeight(view.getContext()) + margin, margin, margin);
         View tvAlbum = view.findViewById(R.id.tvAlbum);
-        if (!getArguments().getBoolean(ZXNav.KEY_SHOW_ALBUM, true)) {
+        if (!getArguments().getBoolean(KEY_SHOW_ALBUM, true)) {
             tvAlbum.setVisibility(View.GONE);
             return;
         }
@@ -143,8 +147,9 @@ public class CaptureFragment extends Fragment implements SurfaceHolder.Callback,
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode != Activity.RESULT_OK)
+        if (resultCode != Activity.RESULT_OK) {
             return;
+        }
         if (requestCode == REQUESTCODE_ALBUN) {
             List<String> imageList = data.getStringArrayListExtra(ImageSelectActivity.KEY_result);
             if (imageList != null && imageList.size() > 0) {
@@ -159,8 +164,9 @@ public class CaptureFragment extends Fragment implements SurfaceHolder.Callback,
             public void run() {
                 String codeText = ZXingUtil.syncDecodeQRCode(path);
                 Result result = null;
-                if (!TextUtils.isEmpty(codeText))
+                if (!TextUtils.isEmpty(codeText)) {
                     result = new Result(codeText, null, null, null);
+                }
                 dealResult(result, true);
             }
         });
@@ -168,11 +174,9 @@ public class CaptureFragment extends Fragment implements SurfaceHolder.Callback,
 
     private void initCamera(SurfaceHolder surfaceHolder) {
         if (surfaceHolder == null) {
-            Log.e(TAG, "SurfaceHolder 不存在");
             return;
         }
         if (mCameraManager.isOpen()) {
-            Log.w(TAG, "initCamera() while already open -- late SurfaceView callback?");
             return;
         }
         try {
@@ -182,15 +186,11 @@ public class CaptureFragment extends Fragment implements SurfaceHolder.Callback,
             mViewFinder.drawViewfinder();
         } catch (Exception e) {
             e.printStackTrace();
-            Log.e(TAG, "开启摄像头异常：" + e.toString());
         }
     }
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        if (holder == null) {
-            Log.e(TAG, "*** WARNING *** surfaceCreated() gave us a null surface!");
-        }
         if (!hasSurface) {
             hasSurface = true;
             initCamera(holder);
@@ -247,8 +247,9 @@ public class CaptureFragment extends Fragment implements SurfaceHolder.Callback,
                     mCameraManager.requestPreviewFrame(CaptureFragment.this);
                 } else {
                     mBeepManager.playBeepSoundAndVibrate();
-                    if (mOnScanListener != null)
+                    if (mOnScanListener != null) {
                         mOnScanListener.onScanResult(result.getText());
+                    }
                 }
             }
         });
@@ -258,10 +259,11 @@ public class CaptureFragment extends Fragment implements SurfaceHolder.Callback,
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.llLight) {
-            toogltLight();
+            toggleLight();
         } else if (id == R.id.imgClose) {
-            if (getActivity() != null)
+            if (getActivity() != null) {
                 getActivity().finish();
+            }
         } else if (id == R.id.tvAlbum) {
             goToAlbumSelect();
         }
@@ -275,17 +277,31 @@ public class CaptureFragment extends Fragment implements SurfaceHolder.Callback,
         ISNav.getInstance().toImageSelectActivity(this, config, REQUESTCODE_ALBUN);
     }
 
-    private void toogltLight() {
+    private void toggleLight() {
         if (isLightOn) {
-            isLightOn = false;
-            mCameraManager.offLight();
-            mImgLight.setImageResource(R.mipmap.zxingcode_scan_flash_light_off);
-            mTvLightInfo.setText(R.string.zxingcode_light_open);
+            try {
+                isLightOn = false;
+                mCameraManager.offLight();
+                mImgLight.setImageResource(R.mipmap.zxingcode_scan_flash_light_off);
+                mTvLightInfo.setText(R.string.zxingcode_light_open);
+            } catch (Exception e) {
+                e.printStackTrace();
+                if (getActivity() != null) {
+                    Toast.makeText(getActivity(), getString(R.string.zxingcode_light_close_failed), Toast.LENGTH_SHORT).show();
+                }
+            }
         } else {
-            isLightOn = true;
-            mCameraManager.openLight();
-            mImgLight.setImageResource(R.mipmap.zxingcode_scan_flash_light_on);
-            mTvLightInfo.setText(R.string.zxingcode_light_close);
+            try {
+                isLightOn = true;
+                mCameraManager.openLight();
+                mImgLight.setImageResource(R.mipmap.zxingcode_scan_flash_light_on);
+                mTvLightInfo.setText(R.string.zxingcode_light_close);
+            } catch (Exception e) {
+                e.printStackTrace();
+                if (getActivity() != null) {
+                    Toast.makeText(getActivity(), getString(R.string.zxingcode_light_open_failed), Toast.LENGTH_SHORT).show();
+                }
+            }
         }
     }
 
