@@ -1,0 +1,8 @@
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="ExtraTranslation">
+    <string name="zxingcode_scan_hint_text">將二維碼放入框內，即可自動掃描</string>
+    <string name="zxingcode_light_open">打開手電筒</string>
+    <string name="zxingcode_light_close">關閉手電筒</string>
+    <string name="zxingcode_light_close_failed">關閉手電筒失敗</string>
+    <string name="zxingcode_light_open_failed">打開手電筒失敗</string>
+    <string name="zxingcode_find_nothing">未發現內容</string>
+</resources>

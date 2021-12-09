@@ -1,0 +1,8 @@
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="ExtraTranslation">
+    <string name="zxingcode_scan_hint_text">Put the QR code into the frame.</string>
+    <string name="zxingcode_light_open">Turn on</string>
+    <string name="zxingcode_light_close">Turn off</string>
+    <string name="zxingcode_light_close_failed">Failed to turn off flashlight.</string>
+    <string name="zxingcode_light_open_failed">Failed to turn on the flashlight.</string>
+    <string name="zxingcode_find_nothing">No content was found.</string>
+</resources>

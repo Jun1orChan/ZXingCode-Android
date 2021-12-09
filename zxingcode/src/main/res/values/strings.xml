@@ -1,0 +1,8 @@
+<resources>
+    <string name="zxingcode_scan_hint_text">将二维码放入框内，即可自动扫描</string>
+    <string name="zxingcode_light_open">打开手电筒</string>
+    <string name="zxingcode_light_close">关闭手电筒</string>
+    <string name="zxingcode_light_close_failed">关闭手电筒失败</string>
+    <string name="zxingcode_light_open_failed">打开手电筒失败</string>
+    <string name="zxingcode_find_nothing">未发现内容</string>
+</resources>
