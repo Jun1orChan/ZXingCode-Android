@@ -12,7 +12,7 @@
 1.项目build.gradle文件中添加
 
 ```gradle
-   implementation 'implementation 'com.github.Jun1orChan:ZXingCode-Android:1.2.0''
+   implementation 'com.github.Jun1orChan:ZXingCode-Android:1.2.0'
  ```
 
 ## 使用
